@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Simple Calculator{% endblock %}
+
+    {% block stylesheets %}
+        <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    {% endblock stylesheets %}
+
+    {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous" defer></script>
+        <script src="{{ asset('js/scripts.js') }}" defer></script>
+    {% endblock javascripts %}
+
+{% block body %}
+
+    <div class="cal-grid">
+        <div class="output">
+            <div data-prev-operand class="prev-operand">
+                {% if expression is defined %}
+                    {{ expression }}
+                {% endif %}
+            </div>            
+            {# <div data-cur-operand class="cur-operand"></div> #}
+            <div data-result class="cur-operand">
+                {% if answer is defined %}
+                    {{ answer }}
+                {% endif %}
+            </div>
+        </div>
+   
+        <button data-all-clear class="span-3btn">AC</button>
+        {# <button data-del>DEL</button> #}
+        <button data-operation>/</button>
+        <button data-num>1</button>
+        <button data-num>2</button>
+        <button data-num>3</button>
+        <button data-operation>*</button>
+        <button data-num>4</button>
+        <button data-num>5</button>
+        <button data-num>6</button>
+        <button data-operation>+</button>
+        <button data-num>7</button>
+        <button data-num>8</button>
+        <button data-num>9</button>
+        <button data-operation>-</button>
+        <button data-num>.</button>
+        <button data-num>0</button>
+        
+        <button data-equals class="span-2btn">=</button>
+    </div>
+    <form id="form" action="/evaluate" method="post">
+        <input type="hidden" name="token" value="{{ csrf_token('evaluate-string') }}"/>
+        <input type="hidden" name="expression" value="0">
+    </form>
+
+
+{% endblock body %}
