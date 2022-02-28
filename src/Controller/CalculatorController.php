@@ -15,14 +15,14 @@ class CalculatorController extends AbstractController
      */
     public function index(): Response 
     {
-        return new Response('<html><body><h1>Hello, welcome to your Calculator app!!!</h1></body></html>');
+        return new Response("<html><body><h1>Hello, welcome to the Calculator app!!!</h1></body></html>");
     }
 
 
     /**
      * @Route("/calculator", name="calculator")
      */
-    public function number(Request $request): Response
+    public function calculator(Request $request): Response
     {
         $expression = $request->query->get('expression');
         $answer = $request->query->get('answer');
@@ -42,8 +42,6 @@ class CalculatorController extends AbstractController
         $expression = $request->request->get('expression');
         $token = $request->request->get('token');
 
-        // dd($token);
-
         if ($this->isCsrfTokenValid('evaluate-string', $token)) {
             if(!empty($expression)) {
                 $evaluator = new StringEvaluator();
@@ -55,8 +53,6 @@ class CalculatorController extends AbstractController
             'expression' => $expression,
             'answer' => $answer,
         ]);
-
     }
-
     
 }

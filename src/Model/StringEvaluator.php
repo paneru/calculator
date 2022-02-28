@@ -5,9 +5,9 @@ namespace App\Model;
 class StringEvaluator
 {
 
-    public function evaluateString(string $expression)
+    public function evaluateString(string $expression) : string
     {
-        $result=null;
+        $result = null;
         $operators = [];
 
         $tmp_op = preg_replace('([^\\+\\-*\\/%\\^])', ' ', trim($expression));
